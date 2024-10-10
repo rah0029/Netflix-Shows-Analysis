@@ -145,33 +145,37 @@ WHERE director ilike '%Rajiv Chilaka%';
 
 ### 8. List all TV shows with more than 5 seasons
 
- '''SELECT title, duration 
+ ```
+SELECT title, duration 
  FROM Netflix
  WHERE type= 'TV Show' 
  	   AND
 	   substring(duration, 1 , position('S' in duration)-1 ) ::int >5;
-'''
+```
 - OR
 
-'''SELECT title,duration
+```
+SELECT title,duration
 FROM Netflix
 WHERE type='TV Show'
 	  AND
 	  split_part(duration,' ',1):: int >5;
-'''
+```
 
 ### 9. Count the number of content items in each genre
 
-'''SELECT
-		unnest(string_to_array(listed_in,',')) as genre, 
-		count(*) as total_content
+```
+SELECT
+      unnest(string_to_array(listed_in,',')) as genre,
+      count(*) as total_content
 FROM Netflix
 GROUP BY genre;
-'''
+```
 
 ### 10. Find each year and the average numbers of content release by India on Netflix. Return top 5 year with highest avg content release.
 
-'''SELECT 
+```
+SELECT 
 	--right(date_added,4) as release_on_netflix,
 	EXTRACT(year from  to_date(date_added, 'Month, DD, YYYY') ) as release_on_netflix,
 	count(*) as total_content,
@@ -181,39 +185,43 @@ WHERE country ilike '%India%'
 GROUP BY release_on_netflix
 ORDER BY avg_content desc
 LIMIT 5;
-'''
+```
 
 ### 11.List all movies that are documentries.
 
-'''SELECT title, listed_in
+```
+SELECT title, listed_in
 FROM Netflix
 WHERE 
      type='Movie'
 	 AND
 	 listed_in ilike '%Documentaries%'
-'''	 
+```	 
 	 
 ### 12. Find all content without a director
 
-'''SELECT title
+```
+SELECT title
 FROM Netflix
 WHERE director is Null
-'''
+```
 
 ### 13. Find how many movies actor 'Salman Khan' appeared in last 10 years
 
-'''SELECT title,casts,release_year
+```
+SELECT title,casts,release_year
 FROM Netflix
 WHERE type='Movie'
 	  AND
 	  casts ilike '%Salman Khan%'
 	  AND
       release_year > EXTRACT(year from current_date)-10
-'''  
+```  
 
 ### 14. Find the top 10 actors who have appeared in the highest number of movies produced in India
 
-'''SELECT 
+```
+SELECT 
 	unnest(string_to_array (casts,',') ) as actor,
 	count(*) as total_movies
 FROM Netflix
@@ -223,12 +231,13 @@ WHERE country ilike '%India%'
 GROUP BY actor
 order by total_movies desc
 LIMIT 10;
-'''
+```
 
 ### 15. Categorize the content based on the presence of the keywords 'kill' and 'violence' in the description field. Label content 
 containing theses keywords as 'Bad' and all other content as 'Good'. Count how many items fall into each category.
 
-'''WITH new_table
+```
+WITH new_table
 AS
 (
   SELECT title,description,
@@ -245,9 +254,10 @@ AS
 SELECT category, count(*) as total_content
 FROM new_table
 GROUP BY category;
-'''
+```
 
 ## Findings and Conclusion
+
 Content Distribution: The dataset contains a diverse range of movies and TV shows with varying ratings and genres.
 Common Ratings: Insights into the most common ratings provide an understanding of the content's target audience.
 Geographical Insights: The top countries and the average content releases by India highlight regional content distribution.
