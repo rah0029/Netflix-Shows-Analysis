@@ -13,7 +13,7 @@ This project involves a comprehensive analysis of Netflix's movies and TV shows 
 - **Dataset Link:** [Movies Dataset](https://www.kaggle.com/datasets/shivamb/netflix-shows?resource=download)
 
 ## Schema
-```
+```sql
 CREATE TABLE Netflix
  ( 
   show_id			varchar(10),
@@ -22,12 +22,12 @@ CREATE TABLE Netflix
   director			varchar(300),
   casts				varchar(1000),
   country			varchar(200),			
-  date_added		varchar(50),
-  release_year	    int,
+  date_added		        varchar(50),
+  release_year	                int,
   rating			varchar(20),
   duration			varchar(20),
   listed_in			varchar(150),
-  description		varchar(300)
+  description		        varchar(300)
  );
  ```
 
