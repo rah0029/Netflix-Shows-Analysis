@@ -33,11 +33,7 @@ CREATE TABLE Netflix
 
 ```SELECT * FROM Netflix;```
 
-```
-SELECT count(*) as total_count
-FROM Netflix
-```
-
+```SELECT count(*) as total_count FROM Netflix;```
 
 
 ## BUSINESS PROBLEMS AND SOLUTIONS :-
@@ -50,7 +46,7 @@ FROM Netflix
 GROUP BY type;
 ```
 
-### .Find the most common rating for movies and TV shows.
+### 2.Find the most common rating for movies and TV shows.
 
 ```
 SELECT rating, count(*) as total_count
