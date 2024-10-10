@@ -36,9 +36,10 @@ CREATE TABLE Netflix
 	
 ```SELECT * FROM Netflix;```
 
-```SELECT count(*) as total_count
-FROM Netflix```
-
+```
+SELECT count(*) as total_count
+FROM Netflix
+```
 
 
 
@@ -46,61 +47,69 @@ FROM Netflix```
 
 
 ### 1.Count the number of Movies vs TV Shows.
-```SELECT type, count(*) as Total
+```
+SELECT type, count(*) as Total
 FROM Netflix
-GROUP BY type;```
+GROUP BY type;
+```
 
 ### .Find the most common rating for movies and TV shows.
 
-'''SELECT rating, count(*) as total_count
+```
+SELECT rating, count(*) as total_count
 FROM Netflix
 GROUP BY rating
 ORDER BY total_count DESC
 Limit 1;
-'''
+```
 
 ### 3. List all movies released in a specific year (eg. 2020)
 
-'''SELECT *
+```
+SELECT *
 FROM Netflix
 WHERE 
 	type= 'Movie' 
 	AND 
 	release_year=2020;
-'''
+```
 
 ### 4. Find the top 5 countries with the most content on Netflix
 	
-'''SELECT country, count(*) as total_content
+```
+SELECT country, count(*) as total_content
 FROM Netflix
 GROUP BY country
 ORDER BY total_content DESC
 LIMIT 5;
-'''
+```
 - It would work BUT some of the content is made by multiple countries, which sql is identifying whole as one. 
 
 - So,
-'''SELECT 
-	unnest( string_to_array (country,',') ) as new_country,
-	-- string_to_array (string,"delimeter")
-	--^^Here we convert country_string to array and then unnest the array. Volla! we get individual countries^^--
+```
+SELECT 
+      unnest( string_to_array (country,',') ) as new_country,
+	- string_to_array (string,"delimeter")
+	- ^^Here we convert country_string to array and then unnest the array. Volla! we get individual countries^^--
 	count(*) as total_content
 FROM Netflix
 GROUP BY new_country
 ORDER BY total_content DESC
 Limit 5;
-'''
+```
 
 ### 5. Identify the longest movie.
 
-'''SELECT title,duration 
+```
+SELECT title,duration 
 FROM Netflix
 WHERE type='Movie' AND duration=(SELECT MAX(duration) FROM Netflix);
-'''
+```
 - It would work BUT duration is giving in the string format
 
 - So,
-'''SELECT title, 
+```
+SELECT title, 
 	substring(duration, 1 , position('m' in duration)-1 ) ::int duration
 	--substring(string, starting position, ending position)
 	--^^We extract string_number part from Given String and typecast into a integer^^--
@@ -108,15 +117,16 @@ FROM Netflix
 WHERE type='Movie'
 ORDER BY duration 
 LIMIT 1;
-'''
+```
 
 ### 6. Find the content added in last 5 years.
 
-''' SELECT title, date_added
+```
+ SELECT title, date_added
 FROM Netflix
 WHERE
 	 To_Date(date_added,'Month,DD,YYYY') >= current_date-interval '5 years'
-  '''
+```
 - To_Date: Coverts string_data to Date Format
 - INTERVAL '5 years': Specifies a time interval of 5 years.
 - CURRENT_DATE - INTERVAL '5 years': Subtracts 5 years from the current date.
@@ -124,10 +134,11 @@ WHERE
 
 ### 7.Find all the Movies/TV Shows by director 'Rajiv Chilaka'
 
-'''SELECT title
+```
+SELECT title
 FROM Netflix
 WHERE director ilike '%Rajiv Chilaka%';
-'''
+```
 - search the name case insensitively
 - %: because their are the cells with multiple directors
 
