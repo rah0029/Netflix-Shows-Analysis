@@ -31,8 +31,8 @@ CREATE TABLE Netflix
  );
  ```
 
--- If not loading automatically(by clicking), do this manually
-	COPY Netflix FROM 'S:\Downloads\netflix movie and tvshows.csv' DELIMITER ',' CSV HEADER;
+- If not loading automatically(by clicking), do this manually
+```COPY Netflix FROM 'S:\Downloads\netflix movie and tvshows.csv' DELIMITER ',' CSV HEADER;```
 	
 ```SELECT * FROM Netflix;```
 
