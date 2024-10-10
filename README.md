@@ -13,7 +13,7 @@ This project involves a comprehensive analysis of Netflix's movies and TV shows 
 - **Dataset Link:** [Movies Dataset](https://www.kaggle.com/datasets/shivamb/netflix-shows?resource=download)
 
 ## Schema
-'''
+```
 CREATE TABLE Netflix
  ( 
   show_id			varchar(10),
@@ -29,17 +29,15 @@ CREATE TABLE Netflix
   listed_in			varchar(150),
   description		varchar(300)
  );
- ,,,
+ ```
 
 -- If not loading automatically(by clicking), do this manually
 	COPY Netflix FROM 'S:\Downloads\netflix movie and tvshows.csv' DELIMITER ',' CSV HEADER;
 	
-'''SELECT * FROM Netflix;'''
+```SELECT * FROM Netflix;```
 
-'''SELECT count(*) as total_count
-FROM Netflix;
-'''
-
+```SELECT count(*) as total_count
+FROM Netflix```
 
 
 
@@ -48,11 +46,9 @@ FROM Netflix;
 
 
 ### 1.Count the number of Movies vs TV Shows.
-
-'''SELECT type, count(*) as Total
+```SELECT type, count(*) as Total
 FROM Netflix
-GROUP BY type;
-'''
+GROUP BY type;```
 
 ### .Find the most common rating for movies and TV shows.
 
